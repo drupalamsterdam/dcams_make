@@ -1,10 +1,7 @@
-dcams_make
+dcams_make  (openshift branch)
 ==========
 
-Drupal Amsterdam site make file. Pull requests here please.
-
-Scratch pad site for the NL and Amsterdam community to make notes and features
-in preperation for later in the year. 
-
-Want functionality not on the site yet?
-Fork, make a feature, add it to the make file, send a pull request.
+This branch includes a very basic deployment script for openshift. It deploys
+the makefile on pushing changes to the openshift hosting. Great for development
+and testing, but not going to cut much else - for a start the hosting is down
+during the build, and there is no testing etc.
