@@ -16,7 +16,7 @@ then
 fi
 
 DRUPAL_DIR=${OPENSHIFT_DATA_DIR}drupal
-DRUPAL_SITE_DIR=${OPENSHIFT_DATA_DIR}sites
+DRUPAL_SITE_DIR=${OPENSHIFT_DATA_DIR}sites.default
 
 echo
 
@@ -27,45 +27,59 @@ cat >$OPENSHIFT_HOMEDIR/.drush/drushrc.php <<EOF
   \$options['root'] = \$_ENV['OPENSHIFT_REPO_DIR'].'php';
 EOF
 
-#
-# If there is no current download of Drupal, create one.
-#
-if [ ! -d "${OPENSHIFT_DATA_DIR}downloads/current" ]
+if [ ! -e "${OPENSHIFT_REPO_DIR}dcams.make" ]
 then
-  mkdir -p ${OPENSHIFT_TMP_DIR}drupal
-
-  echo "Download and install the latest stable version of Drupal"
-  echo
-
-  mkdir -p ${OPENSHIFT_DATA_DIR}downloads
-  if ! drush dl drupal --destination=${OPENSHIFT_DATA_DIR}downloads --yes
-  then
-    echo "ERROR: Unable download and install Drupal."
-    exit 7
-  fi
-
-  #
-  # Link the /current symlink to the latest Drupal instance
-  #
-  rm -f ${OPENSHIFT_DATA_DIR}downloads/current
-  LATEST=$(ls -1t ${OPENSHIFT_DATA_DIR}downloads | head -1)
-  export DRUPAL_INSTALL_DIR="${OPENSHIFT_DATA_DIR}downloads/${LATEST}"
-  ln -s ${LATEST} ${OPENSHIFT_DATA_DIR}downloads/current
-
-  mv $DRUPAL_INSTALL_DIR/sites $DRUPAL_INSTALL_DIR/sites.original
-
-  #
-  # Ensure there is a default health check
-  #
-  cp ${OPENSHIFT_REPO_DIR}.openshift/health_check.php ${DRUPAL_INSTALL_DIR}
-
-  patch ${DRUPAL_INSTALL_DIR}/.htaccess < ${OPENSHIFT_REPO_DIR}.openshift/.htaccess.patch
-
-  echo "Drupal installed to $DRUPAL_INSTALL_DIR"
-else
-  DRUPAL_INSTALL_DIR=$(readlink -f ${OPENSHIFT_DATA_DIR}downloads/current)
-  echo "Drupal is already installed at $DRUPAL_INSTALL_DIR"
+  echo "ERROR: No dcams.make file in your Git repo."
+  exit 5
 fi
+  
+# Very basic backup previous version. Just keeps last.
+if [ -d "${OPENSHIFT_DATA_DIR}downloads/current" ]
+then
+  DRUPAL_PREVIOUS_DIR=$(readlink -f ${OPENSHIFT_DATA_DIR}downloads/current)
+  if [ -d "${OPENSHIFT_DATA_DIR}downloads/last" ]
+  then
+    DRUPAL_LAST_BACKUP=$(readlink -f ${OPENSHIFT_DATA_DIR}downloads/last)
+    echo "Deleting previous backup ${DRUPAL_LAST_BACKUP}"
+    rm -rf ${DRUPAL_LAST_BACKUP}
+  fi
+  echo "Deleting old backup symlink ${OPENSHIFT_DATA_DIR}downloads/last"
+  rm -f "${OPENSHIFT_DATA_DIR}downloads/last"
+  rm -f "${OPENSHIFT_DATA_DIR}downloads/current"
+  echo "Creating new symlink ${DRUPAL_PREVIOUS_DIR}"
+  ln -s ${DRUPAL_PREVIOUS_DIR} "${OPENSHIFT_DATA_DIR}downloads/last"
+fi
+
+mkdir -p ${OPENSHIFT_TMP_DIR}drupal
+
+echo "Running make file."
+echo
+
+mkdir -p ${OPENSHIFT_DATA_DIR}downloads
+LATEST="dcams-`date +%Y%m%d%H%M%S`"
+export DRUPAL_INSTALL_DIR="${OPENSHIFT_DATA_DIR}downloads/${LATEST}"
+if ! drush make "${OPENSHIFT_REPO_DIR}dcams.make" ${DRUPAL_INSTALL_DIR}
+then
+  echo "ERROR: Failed running make file."
+  exit 7
+fi
+
+#
+# Link the /current symlink to the latest Drupal instance
+#
+rm -f ${OPENSHIFT_DATA_DIR}downloads/current
+ln -s ${LATEST} ${OPENSHIFT_DATA_DIR}downloads/current
+
+mv $DRUPAL_INSTALL_DIR/sites/default $DRUPAL_INSTALL_DIR/sites.default.original
+
+#
+# Ensure there is a default health check
+#
+cp ${OPENSHIFT_REPO_DIR}.openshift/health_check.php ${DRUPAL_INSTALL_DIR}
+
+patch ${DRUPAL_INSTALL_DIR}/.htaccess < ${OPENSHIFT_REPO_DIR}.openshift/.htaccess.patch
+
+echo "Drupal installed to $DRUPAL_INSTALL_DIR"
 
 echo
 
@@ -75,9 +89,9 @@ echo
 #/
 if [ ! -d "$DRUPAL_SITE_DIR" ]
 then
-  cp -r $DRUPAL_INSTALL_DIR/sites.original $DRUPAL_SITE_DIR
-  ln -sfn ../../sites $DRUPAL_INSTALL_DIR/sites
+  cp -r $DRUPAL_INSTALL_DIR/sites.default.original $DRUPAL_SITE_DIR
 fi
+ln -sfn $DRUPAL_SITE_DIR $DRUPAL_INSTALL_DIR/sites/default
 
 #
 # Ensure that the app-root/runtime/repo/php PHP directory points
