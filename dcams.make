@@ -7,7 +7,7 @@ projects[cod][version] = "1.0-alpha4"
 projects[dcams_wikipage][type] = "module"
 projects[dcams_wikipage][download][type] = "git"
 projects[dcams_wikipage][download][url] = "https://github.com/ifrik/dcams_wikipage.git"
-projects[dcams_wikipage][download][revision] = "6f5dff2857b72bcf46dc221fa2b1832c0406e07a"
+projects[dcams_wikipage][download][revision] = "947bf12333d76a57ea3c1c8e5e0efdbd9188368f"
 projects[dcams_wikipage][subdir] = "features"
 
 projects[dcams_locations][type] = "module"
