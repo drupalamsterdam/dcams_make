@@ -15,3 +15,16 @@ projects[dcams_locations][download][type] = "git"
 projects[dcams_locations][download][url] = "https://github.com/ifrik/dcams_locations.git"
 projects[dcams_locations][download][revision] = "700ed2db34d4223abd5a2708a49d5128b7ef5f29"
 projects[dcams_locations][subdir] = "features"
+
+; Dependencies for the Locations feature
+projects[openlayers][version] = "2.0-beta7"
+projects[openlayers][subdir] = "contrib"
+
+projects[geofield][version] = "2.1"
+projects[geofield][subdir] = "contrib"
+
+projects[geophp][version] = "1.7"
+projcets[geophp][subdir] = "contrib"
+
+projects[proj4js][version] = "1.2"
+projcets[proj4js][subdir] = "contrib"
