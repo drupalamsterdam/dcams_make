@@ -13,7 +13,7 @@ projects[dcams_wikipage][subdir] = "features"
 projects[dcams_locations][type] = "module"
 projects[dcams_locations][download][type] = "git"
 projects[dcams_locations][download][url] = "https://github.com/ifrik/dcams_locations.git"
-projects[dcams_locations][download][revision] = "5ea50e48042805ca7f7ce3bdf3ffe01a2b3e00da"
+projects[dcams_locations][download][revision] = "ab261cdc43dec4d180ad624ace8a85715c1f995d"
 projects[dcams_locations][subdir] = "features"
 
 ; Dependencies for the Locations feature
