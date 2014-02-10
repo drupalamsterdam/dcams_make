@@ -30,5 +30,5 @@ projects[proj4js][version] = "1.2"
 projects[proj4js][subdir] = "contrib"
 
 ; Development modules. Comment out for production.
-includes[dcams_devel] = "./dcams_devel.make"
+includes[dcams_devel] = "https://raw.github.com/drupalamsterdam/dcams_make/master/dcams_devel.make"
 projects[drupal][patch][] = "https://raw.github.com/drupalamsterdam/dcams_make/master/drupal.robots_disallow.patch"
