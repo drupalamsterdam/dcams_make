@@ -7,14 +7,20 @@ projects[cod][version] = "1.0-alpha4"
 projects[dcams_wikipage][type] = "module"
 projects[dcams_wikipage][download][type] = "git"
 projects[dcams_wikipage][download][url] = "https://github.com/ifrik/dcams_wikipage.git"
-projects[dcams_wikipage][download][revision] = "947bf12333d76a57ea3c1c8e5e0efdbd9188368f"
+projects[dcams_wikipage][download][revision] = "ae27818011d735af906710949b7f999985d2c767"
 projects[dcams_wikipage][subdir] = "features"
 
 projects[dcams_locations][type] = "module"
 projects[dcams_locations][download][type] = "git"
 projects[dcams_locations][download][url] = "https://github.com/ifrik/dcams_locations.git"
-projects[dcams_locations][download][revision] = "ab261cdc43dec4d180ad624ace8a85715c1f995d"
+projects[dcams_locations][download][revision] = "bb113bf4f17e26866b3754ed69604f910cd24052"
 projects[dcams_locations][subdir] = "features"
+
+projects[cod_events_minimal][type] = "module"
+projects[cod_events_minimal][download][type] = "git"
+projects[cod_events_minimal][download][url] = "https://github.com/ifrik/cod_events_minimal.git"
+projects[cod_events_minimal][download][revision] = "228df5e6d659a6cfccb2cd4c246925dbcbec0bcb"
+projects[cod_events_minimal][subdir] ="features"
 
 ; Dependencies for the Locations feature
 projects[openlayers][version] = "2.0-beta7"
