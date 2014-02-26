@@ -29,7 +29,11 @@ projects[geofield][version] = "2.1"
 projects[geofield][subdir] = "contrib"
 
 projects[geophp][version] = "1.7"
-projcets[geophp][subdir] = "contrib"
+projects[geophp][subdir] = "contrib"
 
 projects[proj4js][version] = "1.2"
-projcets[proj4js][subdir] = "contrib"
+projects[proj4js][subdir] = "contrib"
+
+; Development modules. Comment out for production.
+includes[dcams_devel] = "https://raw.github.com/drupalamsterdam/dcams_make/master/dcams_devel.make"
+projects[drupal][patch][] = "https://raw.github.com/drupalamsterdam/dcams_make/master/drupal.robots_disallow.patch"
