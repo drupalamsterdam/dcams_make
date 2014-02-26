@@ -18,7 +18,7 @@ projects[dcams_locations][subdir] = "features"
 projects[cod_events_minimal][type] = "module"
 projects[cod_events_minimal][download][type] = "git"
 projects[cod_events_minimal][download][url] = "https://github.com/ifrik/cod_events_minimal.git"
-projects[cod_events_minimal][download][revision] = "e55df77a70f562d9b919ee446ef74926a894244a"
+projects[cod_events_minimal][download][revision] = "f9cc0135bdf4522b1b0aba43de1ee0d2aa42a8f6"
 projects[cod_events_minimal][subdir] ="features"
 
 ; Dependencies for the Locations feature
