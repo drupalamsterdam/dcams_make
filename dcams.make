@@ -12,7 +12,7 @@ projects[dcams_wikipage][subdir] = "features"
 projects[dcams_locations][type] = "module"
 projects[dcams_locations][download][type] = "git"
 projects[dcams_locations][download][url] = "https://github.com/ifrik/dcams_locations.git"
-projects[dcams_locations][download][revision] = "bb113bf4f17e26866b3754ed69604f910cd24052"
+projects[dcams_locations][download][revision] = "d2f98859543cf18238cc864f6b92a55fb409064a"
 projects[dcams_locations][subdir] = "features"
 
 projects[cod_events_minimal][type] = "module"
