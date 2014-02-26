@@ -2,7 +2,6 @@ core = 7.x
 
 api = 2
 projects[drupal][version] = "7.26"
-projects[cod][version] = "1.0-alpha4"
 
 projects[dcams_wikipage][type] = "module"
 projects[dcams_wikipage][download][type] = "git"
@@ -19,7 +18,7 @@ projects[dcams_locations][subdir] = "features"
 projects[cod_events_minimal][type] = "module"
 projects[cod_events_minimal][download][type] = "git"
 projects[cod_events_minimal][download][url] = "https://github.com/ifrik/cod_events_minimal.git"
-projects[cod_events_minimal][download][revision] = "e84409e97c9688ec28d4e0ae084b40105251c144"
+projects[cod_events_minimal][download][revision] = "e55df77a70f562d9b919ee446ef74926a894244a"
 projects[cod_events_minimal][subdir] ="features"
 
 ; Dependencies for the Locations feature
